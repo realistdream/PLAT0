@@ -3,7 +3,7 @@ import random
 from flask import Flask, render_template, request
 
 # Set up the OpenAI API key
-openai.api_key = "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"
+openai.api_key = "YOUR_OPENAI_KEY"
 
 # Define the OCEAN personality traits and their associated prompts
 personality_traits = {
@@ -49,4 +49,4 @@ def get_response():
 
 # Run the application
 if __name__ == '__main__':
-   app.run(host='192.168.1.161', port=5000)
+   app.run(debug=True)
