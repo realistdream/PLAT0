@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot Demo</title>
+</head>
+<body>
+    <h1>Chatbot Demo</h1>
+    <div>
+        <label for="user_input">You:</label>
+        <input type="text" id="user_input">
+        <button onclick="getChatbotResponse()">Send</button>
+    </div>
+    <div id="chat_messages">
+        <!-- Chat messages will be displayed here -->
+    </div>
+
+    <script>
+        function getChatbotResponse() {
+            var user_input = document.getElementById("user_input").value;
+
+            fetch("/get_response", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "user_input=" + encodeURIComponent(user_input)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Append user input and chatbot response to chat_messages div
+                var chatMessagesDiv = document.getElementById("chat_messages");
+                var userMessage = document.createElement("p");
+                userMessage.textContent = "You: " + user_input;
+                chatMessagesDiv.appendChild(userMessage);
+
+                var chatbotMessage = document.createElement("p");
+                chatbotMessage.textContent = "Chatbot: " + data.bot_response;
+                chatMessagesDiv.appendChild(chatbotMessage);
+
+                // Clear input field after sending the message
+                document.getElementById("user_input").value = "";
+            });
+        }
+    </script>
+</body>
+</html>
+
