@@ -38,7 +38,7 @@ app = Flask(__name__)
 # Define the home page route
 @app.route('/')
 def index():
-    return render_template('index2.html')
+    return render_template('index.html')
 
 # Define the chatbot response route
 @app.route('/get_response', methods=['POST'])
